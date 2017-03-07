@@ -61,7 +61,7 @@ legend(x = "topright", lty = 1,
 
 we can run this and see how it works.
 ```{r run_function}
-coalesce_2Genes(N = 500, t = 5000)
+coalesce_2Genes(N = 10000, t = 100000)
 ```
 
 Try this yourself for different numbers of samples (N) and generation times. In particular how is probability of coalescing related to sample size? time (in generations)?
@@ -86,7 +86,7 @@ legend(x = "topright", lty = c(2,3),
 
 How well does this work for different sample sizes?
 ```{r}
-coalesce_2GenesApprox(N = 500, t = 10000)
+coalesce_2GenesApprox(N = 10, t = 100)
 ```
 
 Try a variety of sample sizes (N) for the number of sequences.
