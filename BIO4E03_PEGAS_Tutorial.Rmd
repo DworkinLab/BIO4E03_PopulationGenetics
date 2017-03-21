@@ -40,10 +40,10 @@ print(woodmouse)
 str(woodmouse)
 ```
 
-Since R does not have a super nice graphical interface for such things, it is sometimes hard to look directly at the sequences. You can get a sense like this (using the alview function). In this case we are looking at the first 25 bp of sequence for all samples.
+Since R does not have a super nice graphical interface for such things, it is sometimes hard to look directly at the sequences. You can get a sense like this (using the alview function). In this case we are looking at the first 50 bp of sequence for the first 5 samples (See how we are indexing it below).
 
 ```{r actg_woodmouse}
-alview(woodmouse[1:5, 1:25])
+alview(woodmouse[1:5, 1:50])
 ```
 
 The first sequence shows the actual DNA sequence for one of the DNA sequences in the sample. Each row represents a different DNA sequence from that sample. The dot "." represents a short hand to say that the nucleotide is identical (by state) at that site in comparison to the first sequence. If you see a letter it means that that site is polymorphic.
@@ -75,22 +75,26 @@ grid(100, 2, col = "black")
 
 ## Site frequency spectrum.
 
-One of the things we want to be able to do is look at the SFS (Site Frequency Spectrum). This is such a common thing to do, that there is a function in `pegas` to accomplish this.
+One of the things we want to be able to do is look at the SFS (Site Frequency Spectrum). With an understanding about the expectations of what happens to the SFS under different scenarios involving both natural selection (i.e. positive selection, purifying selection, balancing selection) and demography (population bottlenecks, population expansions, etc) will help you to develop an intuition for what patterns of sequence variation you might see in a sample of DNA sequences. In particular when and how estimators of $\theta = 4N_{e}\mu$ such as number of segregating sites (S), and nucleotide diversity ($\pi$) will provide biased estimates (thus telling you something potentially interesting has happened). This is such a common thing to do, that there is a function in `pegas` to accomplish this (even though it is just some counting).
 
 
 ```{r SFS}
 (sp <- site.spectrum(woodmouse))
 ```
 
-While the SFS is pretty simple in this case, it is still easier to plot it.
+While the SFS is pretty simple in this case, it is still easier to plot it to make sense of it.
 
 ```{r plotSFS}
 plot(sp)
 ```
 
-How does this compare to what we would might expect under complete neutrality? Before we can address that (which is best to do using simulations which we will tackle next week I hope) we need to estimate theta for the sample of DNA sequences.
+How does this compare to what we would might expect under complete neutrality? Before we can address that (which is best to do using simulations which we will tackle next week I hope) we need to estimate $\theta$ for the sample of DNA sequences.
 
-You will note it says "folded" SFS. This was briefly mentioned in class. It turns out that if we know the ancestral state (i.e. which allele is the "new" mutation) we can do a lot more with the SFS. That is called the unfolded SFS. However, if we don't know which variant is ancestral and which is derived we can not *polarize* the polymorphism. In such cases we instead ask about the counts of the *minor* allele (the less frequent variant) at each polymorphic site in the DNA sequences that form the sample we are examining. 
+You will note it says "folded" SFS. This was briefly mentioned in class. It turns out that if we know the ancestral state (i.e. which allele is the "new" derived state, and which is ancestral) we can do a lot more with the SFS. That is called the unfolded SFS. If we are tracking the counts (or frequency) of these, we are able to examine their frequency from 1/n (where n = number of sequences in the sample) to 1.
+
+However, if we don't know which variant is ancestral and which is derived we can not *polarize* the polymorphism. In such cases we instead ask about the counts of the *minor* allele (the less frequent variant) at each polymorphic site in the DNA sequences that form the sample we are examining. In such a case we can only examine allele frequencies from 1/n to 0.5 (or equivalent if we are just counting.). In this case (since we do not have any information to polarize the sites) we are using the folded SFS.
+
+One thing to note about this SFS is how many sites have *singletons*. i.e. a polymorphic site where only one sequence has the minor allele (i.e. with a frequency of 1/n). While there are important biological explanations for this, please keep in mind that all sequencing technologies produce errors, and most errors will be unique and will thus appear as singletons. So in most analyses investigators attempt to correct for this potential experimental artefact (either with redundant and independent sequencing or by statistically modelling the effect).
 
 2. Examine how the SFS changes as you use subsets of the data (at least 6 sequences please). Also feel free to look at subsets along the length of the sequence. How much does the picture change as you look at subsets of the data?
 
@@ -105,24 +109,24 @@ plot(net)
 ```
 
 
-## Measures of theta
+## Measures of $\theta$
 
 We can now proceed and examine patterns of nucleotide diversity, Segregating sites and how they compare for this set of DNA sequences.
 
-3. Remind yourself about nucleotide diversity (pi)
+3. Remind yourself about nucleotide diversity ($\pi$), and how it is measured.
 
+We can use the `nuc.div()` function to estimate $\pi$ which is an estimator of $\theta$
 ```{r ND}
 nuc.div(woodmouse, pairwise.deletion = TRUE)
 ```
 
-We can go ahead and calculate the number of segregating sites as well. The function below shows each site that is segregating.
+We can go ahead and calculate the number of segregating sites, S as well. The function below shows each site that is segregating.
 
 ```{r Sw}
 seg.sites(woodmouse)
 ```
 
 4. How would you show how many segregating sites there are from this?
-
 
 We can go ahead and get our estimate of theta from the number of segregating sites.
 
@@ -140,9 +144,9 @@ theta.s(length(seg.sites(woodmouse)),
 
 Let's remind ourselves of what Tajima's D is. 
 
-What do we expect to see under complete neutrality? (i.e.  4Neu is the only factor influencing diversity in the sample)?
+What do we expect to see under complete neutrality? (i.e.  $\theta = 4N_{e}\mu$ is the only factor influencing diversity in the sample)?
 
-How do we expect our different estimators of theta to change when there is something "more interesting" going on (than just 4Neu)?
+How do we expect our different estimators of theta to change when there is something "more interesting" going on (than just $\theta = 4N_{e}\mu$)?
 
 ```{r}
 tajima.test(woodmouse)
@@ -150,5 +154,5 @@ tajima.test(woodmouse)
 
 What does this suggest about the DNA sequences that make up this sample?
 
-5. As we did above, examine subsets of the data. Keep all 15 sequences, but look at subsets along the length of the DNA sequences (i.e. 1:100, 50:150... ). How do the estimates of S, pi and D change? Why?
+5. As we did above, examine subsets of the data. Keep all 15 sequences, but look at subsets along the length of the DNA sequences (i.e. 1:100, 50:150... ). How do the estimates of S, $\pi$ and D change? Why?
 
