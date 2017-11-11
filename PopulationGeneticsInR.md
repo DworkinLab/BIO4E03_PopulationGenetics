@@ -14,6 +14,9 @@ Nescent also maintains a [list](http://popgen.nescent.org/PACKAGES.html). They a
 There was also a nice special issue in the journal *Molecular Ecology Resources* on **Population Genomics with R**. The issue is [here](http://onlinelibrary.wiley.com/doi/10.1111/men.2017.17.issue-1/issuetoc). This has numerous papers describing a number of software tools in R. This [introduction](http://onlinelibrary.wiley.com/doi/10.1111/1755-0998.12636/full) summarizes lots of it if you want to take a look.
 
 
+## Learning
+[driftR](https://github.com/cjbattey/driftR)
+
 ## Where to start
 There are some libraries that do many many things. `PopGenome` is an example of one. There are a few others as well.
 
