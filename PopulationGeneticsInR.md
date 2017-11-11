@@ -97,4 +97,6 @@ There are some libraries that do many many things. `PopGenome` is an example of 
 ## Not R, but useful
 [fastsimcoal2](http://cmpg.unibe.ch/software/fastsimcoal2/)
 
+[SLiM](https://messerlab.org/slim/)
+
 Will add ms, msms, simcoal2,...
