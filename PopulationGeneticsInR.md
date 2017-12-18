@@ -102,4 +102,6 @@ There are some libraries that do many many things. `PopGenome` is an example of 
 
 [SLiM](https://messerlab.org/slim/)
 
+[angsd](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-014-0356-4). Computing pop gen summary stats. Assumes diploids, no pooling. Link to github page is [here](https://github.com/ANGSD/angsd)
+
 Will add ms, msms, simcoal2,...
