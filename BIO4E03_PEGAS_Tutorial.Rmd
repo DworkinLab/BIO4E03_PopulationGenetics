@@ -52,6 +52,8 @@ We can make a few simple figures to look at the DNA alignments. These functions 
 
 ```{r alignments1}
 image(woodmouse)
+grid(ncol(woodmouse), nrow(woodmouse), 
+     col = "lightgrey")
 ```
 
 While you can spot the polymorphism it is not the clearest picture.
@@ -65,8 +67,8 @@ image(woodmouse, "n", "blue")
 Let's just look at two sequences over a short stretch of the DNA (100 bp).
 
 ```{r short_stretch}
-image(woodmouse[1:2, 1:100])
-grid(100, 2, col = "black")
+image(woodmouse[1:4, 1:100])
+grid(ncol(woodmouse[1:4, 1:100]), nrow(woodmouse[1:4, 1:100]), col = "grey")
 
 ```
 
