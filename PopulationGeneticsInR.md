@@ -106,4 +106,6 @@ There are some libraries that do many many things. `PopGenome` is an example of 
 [msms](http://www.mabs.at/ewing/msms/download.shtml)
 
 [msprime](https://msprime.readthedocs.io/en/latest/index.html)
+
+[ms-ld](https://github.com/vsbuffalo/ms-ld)
 Will add ms, msms, simcoal2,...
