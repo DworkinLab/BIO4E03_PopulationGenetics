@@ -17,6 +17,8 @@ There was also a nice special issue in the journal *Molecular Ecology Resources*
 ## Learning
 [driftR](https://github.com/cjbattey/driftR)
 
+[shinyPopGen](https://github.com/silastittes/shiny_popgen)
+
 ## Where to start
 There are some libraries that do many many things. `PopGenome` is an example of one. There are a few others as well.
 
