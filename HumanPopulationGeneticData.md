@@ -10,3 +10,5 @@ There is huge amounts of data available online. However in most cases it is raw 
 [Human Genome Diversity Project](http://www.hagsc.org/hgdp/files.html)
 
 [HGDP-CEPH GENOME DIVERSITY PANEL](http://www.cephb.fr/hgdp/)
+
+[CEPH PANEL (may be same data as above, just organized differently](http://www.cephb.fr/en/hgdp_panel.php)
